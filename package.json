@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
@@ -33,6 +34,8 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.39.4",
     "eslint-config-next": "16.1.7",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "postcss": "^8",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
@@ -43,5 +46,11 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "pnpm run format",
+      "eslint --max-warnings 0"
+    ]
   }
 }
