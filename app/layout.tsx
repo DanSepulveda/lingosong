@@ -1,15 +1,24 @@
-import { Geist, Geist_Mono, Inter } from "next/font/google"
+import { Metadata } from "next"
+import { Inter, Oxanium } from "next/font/google"
+
+import { cn } from "@/lib/utils"
+
+import { ThemeProvider } from "@/components/theme-provider"
 
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'})
-
-const fontMono = Geist_Mono({
+const oxaniumHeading = Oxanium({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-heading",
 })
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
+
+export const metadata: Metadata = {
+  title: "LingoSong",
+  description:
+    "Aprende idiomas de manera divertida con LingoSong. Transforma tus canciones favoritas en lecciones para aprender vocabulario, gramática y más.",
+}
 
 export default function RootLayout({
   children,
@@ -18,11 +27,16 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", inter.variable)}
+      className={cn(
+        "antialiased",
+        "font-sans",
+        oxaniumHeading.variable,
+        inter.variable
+      )}
     >
-      <body>
+      <body className="flex min-h-screen flex-col bg-background">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
