@@ -8,8 +8,6 @@ import { dbService } from "@/services/db"
 
 import { LevelBadge } from "@/components/song/level-badge"
 
-export const dynamic = "force-dynamic"
-
 export async function RecentSongs() {
   const recentSongs = await dbService.getRecentSongs()
 

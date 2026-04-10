@@ -10,8 +10,6 @@ import { VocabularyTab } from "@/components/song/tabs/vocabulary-tab"
 import { Player } from "@/components/song/video-player"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-export const dynamic = "force-dynamic"
-
 interface PageProps {
   params: Promise<{
     id: string
