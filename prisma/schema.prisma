@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  
+}
+
+enum LyricsSource {
+  lrclib
+  ai
+}
+
+enum McerLevel {
+  A1
+  A2
+  B1
+  B2
+  C1
+  C2
+}
+
+model ExcludedVideo {
+  id            Int       @id @default(autoincrement())
+  youtubeId     String    @unique @map("youtube_id")
+  title         String
+  thumbnailUrl  String    @map("thumbnail_url")
+  reason        String
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  @@map("excluded_video")
+}
+
+model Song {
+  id            Int     @id @default(autoincrement())
+  youtubeId     String  @unique @map("youtube_id")
+  title         String
+  artist        String
+  duration      Int
+  thumbnailUrl  String  @map("thumbnail_url")
+  language      String
+  level         McerLevel
+  
+  // RELATIONS
+  lyrics        Lyric?
+  vocabulary    Vocabulary[]
+  grammarPoints GrammarPoint[]
+  exercises     Exercise[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("song")
+}
+
+model Lyric {
+  id        Int     @id @default(autoincrement())
+  songId    Int     @unique @map("song_id")
+  song      Song    @relation(fields: [songId], references: [id])
+  isSynced  Boolean @default(false)
+  content   Json
+  source    LyricsSource
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("lyric")
+}
+
+model Vocabulary {
+  id                String    @id @default(cuid())
+  songId            Int       @map("song_id")
+  song              Song      @relation(fields: [songId], references: [id])
+  word              String
+  type              String    // verb, adjective, noun, etc
+  level             McerLevel
+  pronunciation     String    // e.g. /ˈsɒŋ/ for "song"
+  contextSentence   String    @map("context_sentence")
+  meaning           String
+  examples          Json
+  comment           String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("vocabulary")
+  @@unique([songId, word])
+}
+
+model GrammarPoint {
+  id                String    @id @default(cuid())
+  songId            Int       @map("song_id")
+  song              Song      @relation(fields: [songId], references: [id])
+  title             String
+  level             McerLevel
+  contextSentence   String    @map("context_sentence")
+  explanation       String
+  examples          Json
+  comment           String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("grammar_point")
+}
+
+model Exercise {
+  id       String @id @default(cuid())
+  songId   Int
+  song     Song   @relation(fields: [songId], references: [id])
+  question String
+  answer   String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("exercise")
+}
