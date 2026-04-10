@@ -4,6 +4,7 @@ import { Inter, Oxanium } from "next/font/google"
 import { cn } from "@/lib/utils"
 
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/sonner"
 
 import "./globals.css"
 
@@ -38,6 +39,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-screen flex-col bg-background">
         <ThemeProvider>{children}</ThemeProvider>
+        <Toaster />
       </body>
     </html>
   )
