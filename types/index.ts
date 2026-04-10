@@ -1,4 +1,5 @@
 import type {
+  Exercise as PrismaExercise,
   GrammarPoint as PrismaGrammarPoint,
   Vocabulary as PrismaVocabulary,
 } from "@/lib/generated/prisma/client"
@@ -53,3 +54,8 @@ export interface GrammarPoint extends Omit<
   }[]
   comment?: string
 }
+
+export type Exercise = Omit<
+  PrismaExercise,
+  "id" | "songId" | "createdAt" | "updatedAt"
+>
