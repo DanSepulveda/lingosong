@@ -3,6 +3,8 @@ import { Header } from "@/components/sections/header"
 import { HeroSection } from "@/components/sections/hero"
 import { RecentSongs } from "@/components/sections/recent-songs"
 
+export const dynamic = "force-dynamic"
+
 export default async function Page() {
   return (
     <>
