@@ -21,3 +21,8 @@ export function elapsed(start: number) {
 export function formatQuery(query: string) {
   return query.toLowerCase().trim().replace(/\s+/g, "+")
 }
+
+export function timeStringToSeconds(time: string) {
+  const [minutes, seconds] = time.split(":").map(Number)
+  return minutes * 60 + seconds
+}

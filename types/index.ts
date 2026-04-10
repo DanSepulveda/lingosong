@@ -13,6 +13,16 @@ export interface YoutubeVideoData {
   embeddable: boolean
 }
 
+export interface BaseLyricLine {
+  time: number | null
+  text: string
+  translation: string
+}
+
+export interface LyricLine extends BaseLyricLine {
+  romanization: string
+}
+
 export interface ProcessVideoData {
   title: string
   artist: string

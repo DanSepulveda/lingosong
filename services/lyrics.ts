@@ -1,5 +1,7 @@
 import { LYRICS_API_CONFIG } from "@/config/services"
-import { formatQuery } from "@/lib/utils"
+import { formatQuery, timeStringToSeconds } from "@/lib/utils"
+
+import type { BaseLyricLine } from "@/types"
 
 type LyricType = "synced" | "plain" | "instrumental" | "none"
 
@@ -37,6 +39,46 @@ const getSongLyric = async (
   }
 }
 
+const parseSyncedLyrics = (input: string): BaseLyricLine[] => {
+  const regex = /\[(\d{2}:\d{2}\.\d{2})\]\s*(.*)/
+  const results: BaseLyricLine[] = []
+
+  for (const line of input.split("\n")) {
+    const match = line.match(regex)
+    if (!match) continue
+
+    const text = match[2].trim()
+    if (!text) continue
+
+    results.push({
+      time: timeStringToSeconds(match[1]),
+      text,
+      translation: "",
+    })
+  }
+
+  return results
+}
+
+const parsePlainLyrics = (input: string): BaseLyricLine[] => {
+  return input
+    .split("\n")
+    .filter((line) => line.trim() !== "")
+    .map((line) => ({
+      time: null,
+      text: line.trim(),
+      translation: "",
+    }))
+}
+
+const parseLyrics = (input: string, type: LyricType) => {
+  if (type === "synced") return parseSyncedLyrics(input)
+  return parsePlainLyrics(input)
+}
+
 export const lyricService = {
   getSongLyric,
+  parseLyrics,
+  parsePlainLyrics,
+  parseSyncedLyrics,
 }
