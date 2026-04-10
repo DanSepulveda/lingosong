@@ -14,6 +14,10 @@ export function durationToSeconds(duration: string) {
   return minutes * 60 + seconds
 }
 
+export function elapsed(start: number) {
+  return `${Date.now() - start}ms`
+}
+
 export function formatQuery(query: string) {
   return query.toLowerCase().trim().replace(/\s+/g, "+")
 }

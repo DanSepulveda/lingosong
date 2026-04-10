@@ -13,6 +13,13 @@ export interface YoutubeVideoData {
   embeddable: boolean
 }
 
+export interface ProcessVideoData {
+  title: string
+  artist: string
+  funFact: string
+  ytData: YoutubeVideoData
+}
+
 export interface Vocabulary extends Omit<
   PrismaVocabulary,
   "id" | "songId" | "createdAt" | "updatedAt" | "comment"
