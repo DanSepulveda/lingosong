@@ -26,3 +26,16 @@ export function timeStringToSeconds(time: string) {
   const [minutes, seconds] = time.split(":").map(Number)
   return minutes * 60 + seconds
 }
+
+export function getLanguageName(code: string, locale = "es") {
+  const rawName =
+    new Intl.DisplayNames([locale], {
+      type: "language",
+    }).of(code) || "-"
+
+  const langName =
+    rawName !== "-"
+      ? (rawName.charAt(0).toUpperCase() + rawName.slice(1)).split(" ")[0]
+      : "-"
+  return langName
+}
