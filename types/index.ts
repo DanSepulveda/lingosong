@@ -24,6 +24,12 @@ export interface LyricLine extends BaseLyricLine {
   romanization: string
 }
 
+export interface Example {
+  originalLanguage: string
+  translation: string
+  romanization: string
+}
+
 export interface ProcessVideoData {
   title: string
   artist: string
