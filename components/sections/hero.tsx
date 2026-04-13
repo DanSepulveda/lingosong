@@ -26,14 +26,22 @@ import type { ProcessVideoData } from "@/types"
 const youtubeUrlSchema = z
   .url("Debe ingresar un enlace válido")
   .refine(
-    (url) => new URL(url).host.includes("youtube.com"),
+    (url) =>
+      new URL(url).host.includes("youtube.com") ||
+      new URL(url).host.includes("youtu.be"),
     "Ingrese un enlace de YouTube"
   )
   .refine(
-    (url) => new URL(url).searchParams.get("v") !== null,
+    (url) =>
+      new URL(url).searchParams.get("v") !== null ||
+      new URL(url).pathname !== null,
     "El enlace no contiene un video válido"
   )
-  .transform((url) => new URL(url).searchParams.get("v") as string)
+  .transform(
+    (url) =>
+      (new URL(url).searchParams.get("v") as string) ??
+      (new URL(url).pathname.replace("/", "") as string)
+  )
 
 export function HeroSection() {
   const [youtubeUrl, setYoutubeUrl] = useState("")
