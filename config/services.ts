@@ -14,6 +14,12 @@ export const LYRICS_API_CONFIG = {
   baseUrl: "https://lrclib.net/api/get",
 } as const
 
+export const TELEGRAM_CONFIG = {
+  baseUrl: "https://api.telegram.org/bot",
+  token: env.TELEGRAM_TOKEN,
+  chatId: env.TELEGRAM_CHAT_ID,
+} as const
+
 export const YOUTUBE_CONFIG = {
   apiKey: env.YOUTUBE_API_KEY ?? "",
   baseUrl: "https://www.googleapis.com/youtube/v3",

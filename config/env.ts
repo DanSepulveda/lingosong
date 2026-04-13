@@ -12,6 +12,8 @@ const envSchema = z.object({
     .string()
     .default("gemini-3.1-flash-lite-preview"),
   YOUTUBE_API_KEY: z.string(),
+  TELEGRAM_TOKEN: z.string(),
+  TELEGRAM_CHAT_ID: z.string(),
 })
 
 const parsedEnv = envSchema.safeParse(process.env)
