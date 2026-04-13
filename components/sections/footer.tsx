@@ -18,6 +18,7 @@ export function Footer() {
         <span>
           Desarrollado por{" "}
           <Link
+            prefetch={false}
             href="https://dansepulveda.dev"
             target="_blank"
             className="underline underline-offset-2 transition-colors hover:text-foreground"

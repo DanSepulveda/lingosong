@@ -26,6 +26,7 @@ export async function RecentSongs() {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {recentSongs.map((song) => (
             <Link
+              prefetch={false}
               key={song.id}
               href={`/cancion/${song.youtubeId}`}
               className="group relative block overflow-hidden rounded-xl border border-border bg-card text-left transition-all duration-300 hover:border-primary/50"
