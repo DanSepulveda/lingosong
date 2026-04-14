@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"],
+      "@generated/*": ["./lib/generated/*"]
     }
   },
   "include": [

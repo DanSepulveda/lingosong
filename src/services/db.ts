@@ -1,4 +1,5 @@
-import { Prisma } from "@/lib/generated/prisma/client"
+import { Prisma } from "@generated/prisma/client"
+
 import { prisma } from "@/lib/prisma"
 
 const existsByYoutubeId = async (youtubeId: string) => {

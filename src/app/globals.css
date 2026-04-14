@@ -126,6 +126,17 @@
   html {
     @apply font-sans;
   }
+    ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply my-4 rounded-full bg-gray-400 transition-colors hover:bg-gray-300;
+  }
 }
 
 @utility section {
