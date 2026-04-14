@@ -7,7 +7,8 @@ import Youtube, { YouTubeEvent } from "react-youtube"
 
 import Image from "next/image"
 
-import { Prisma } from "@/lib/generated/prisma/client"
+import { Prisma } from "@generated/prisma/client"
+
 import { cn } from "@/lib/utils"
 
 import { LyricLine } from "@/types"

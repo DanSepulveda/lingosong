@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
-import { Prisma } from "@/lib/generated/prisma/client"
+import { Prisma } from "@generated/prisma/client"
 
 import { ExerciseCard } from "../exercise"
 

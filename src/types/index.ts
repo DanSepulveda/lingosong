@@ -2,7 +2,7 @@ import type {
   Exercise as PrismaExercise,
   GrammarPoint as PrismaGrammarPoint,
   Vocabulary as PrismaVocabulary,
-} from "@/lib/generated/prisma/client"
+} from "@generated/prisma/client"
 
 export interface YoutubeVideoData {
   title: string
