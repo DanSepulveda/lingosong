@@ -1,12 +1,16 @@
 import { Metadata } from "next"
+import { NextIntlClientProvider, hasLocale } from "next-intl"
 import { Inter, Oxanium } from "next/font/google"
+import { notFound } from "next/navigation"
+
+import { routing } from "@/i18n/routing"
 
 import { cn } from "@/lib/utils"
 
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 
-import "./globals.css"
+import "../globals.css"
 
 const oxaniumHeading = Oxanium({
   subsets: ["latin"],
@@ -21,11 +25,17 @@ export const metadata: Metadata = {
     "Aprende idiomas de manera divertida con LingoSong. Transforma tus canciones favoritas en lecciones para aprender vocabulario, gramática y más.",
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type Props = {
   children: React.ReactNode
-}>) {
+  params: Promise<{ locale: string }>
+}
+
+export default async function RootLayout({ children, params }: Props) {
+  const { locale } = await params
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
+
   return (
     <html
       lang="es"
@@ -38,7 +48,9 @@ export default function RootLayout({
       )}
     >
       <body className="flex min-h-screen flex-col bg-background">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        </ThemeProvider>
         <Toaster />
       </body>
     </html>
